@@ -36,6 +36,8 @@ export class AuthService {
       throw new UnauthorizedException('User with this email already exists');
     }
     const user = await this.usersService.create(createUserDto);
-    return this.login(user); 
+    return {
+      message: 'User created successfully'
+    };
   }
 }
