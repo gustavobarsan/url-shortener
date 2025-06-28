@@ -5,8 +5,9 @@ import { PrismaService } from '../prisma/prisma.service';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { JwtStrategy } from './jwt.strategy'; 
-import { UsersModule } from '../users/users.module'; 
+import { JwtStrategy } from './jwt.strategy';
+import { UsersModule } from '../users/users.module';
+import { LocalStrategy } from './local.strategy';
 
 @Module({
   imports: [
@@ -16,13 +17,13 @@ import { UsersModule } from '../users/users.module';
       imports: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get<string>('JWT_SECRET'),
-        signOptions: { expiresIn: '60m' }, 
+        signOptions: { expiresIn: '60m' },
       }),
       inject: [ConfigService],
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, PrismaService, JwtStrategy],
-  exports: [AuthService, JwtModule], 
+  providers: [AuthService, PrismaService, JwtStrategy, LocalStrategy],
+  exports: [AuthService, JwtModule],
 })
 export class AuthModule {}
