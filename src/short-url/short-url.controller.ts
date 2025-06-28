@@ -28,7 +28,6 @@ import {
   
     @Post('shorten')
     @HttpCode(HttpStatus.CREATED)
-    @UseGuards(AuthGuard('jwt')) 
     async shortenUrl(
       @Body() createShortUrlDto: CreateShortUrlDto,
       @Req() req: Request,
