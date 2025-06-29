@@ -8,6 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './jwt.strategy';
 import { UsersModule } from '../users/users.module';
 import { LocalStrategy } from './local.strategy';
+import { JwtOptionalGuard } from './jwt-optional.guard';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { LocalStrategy } from './local.strategy';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, PrismaService, JwtStrategy, LocalStrategy],
+  providers: [AuthService, PrismaService, JwtStrategy, LocalStrategy, JwtOptionalGuard],
   exports: [AuthService, JwtModule],
 })
 export class AuthModule {}

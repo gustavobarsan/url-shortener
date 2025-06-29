@@ -33,7 +33,7 @@ export class ShortUrlService {
       data: {
         originalUrl: createShortUrlDto.originalUrl,
         shortCode: shortCode!,
-        userId: userId || null, 
+        userId: userId || null,
       },
     });
   }

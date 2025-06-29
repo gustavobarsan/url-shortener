@@ -41,11 +41,11 @@ import {
       const domain = this.configService.get<string>('BASE_URL'); 
       return {
         originalUrl: shortUrl.originalUrl,
-        shortenedUrl: `${domain}/${shortUrl.shortCode}`,
+        shortenedUrl: `${domain}/shorten/${shortUrl.shortCode}`,
       };
     }
   
-    @Get(':shortCode')
+    @Get('shorten/:shortCode')
     @Redirect()
     async redirect(@Param('shortCode') shortCode: string) {
       const shortUrl = await this.shortUrlService.getOriginalUrl(shortCode);
@@ -53,7 +53,7 @@ import {
     }
   
     @Get('my-urls')
-    @UseGuards(AuthGuard('jwt'))
+    @UseGuards(AuthGuard('jwt'))  
     async getMyUrls(@Req() req: Request) {
       const userId = (req.user as any).id;
       return this.shortUrlService.getUserShortUrls(userId);
